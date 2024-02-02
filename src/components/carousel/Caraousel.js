@@ -15,7 +15,7 @@ import Genres from "../genres/Genres";
 
 import "./style.scss";
 
-const Carousel = ({ data, loading, endpoint, title }) => {
+const Caraousel = ({ data, loading, endpoint, title }) => {
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
@@ -103,4 +103,4 @@ const Carousel = ({ data, loading, endpoint, title }) => {
   );
 };
 
-export default Carousel;
+export default Caraousel;
