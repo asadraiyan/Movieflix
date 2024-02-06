@@ -4,8 +4,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "./style.scss";
 import { fetchApiData } from "../../utils/api";
 import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
-// import MovieCard from "../../components/movieCard/MovieCard";
+import MovieCard from "../../components/movieCard/MovieCard";
 import Spinner from "../../components/spinner/Spinner";
+import Img from "../../components/lazyLoadImage/Img";
 import noResults from "../../assets/no-results.png";
 import "./style.scss";
 
@@ -40,7 +41,7 @@ const SearchResult = () => {
 
   useEffect(() => {
     fecthInitialData();
-    fetchNextPageData();
+    setPageNum(1);
   }, [query]);
 
   return (
@@ -56,9 +57,29 @@ const SearchResult = () => {
                   data?.total_results > 1 ? "results" : "result"
                 } of ${query}`}
               </div>
+
+              <InfiniteScroll
+                className="content"
+                dataLength={data?.results?.length || []}
+                next={fetchNextPageData}
+                hasMore={pageNum <= data?.total_pages}
+                loader={<Spinner />}
+              >
+                {data?.results?.map((item, index) => {
+                  if (item.media_type === "person") return;
+                  return (
+                    <MovieCard key={index} data={item} fromSearch={true} />
+                  );
+                })}
+              </InfiniteScroll>
             </>
           ) : (
-            <span className="reultNotFound"></span>
+            <>
+              <div className="noResultSection">
+                <Img src={noResults} className="noResults" />
+                <span className="resultNotFound">Sorry, No Results Found</span>
+              </div>
+            </>
           )}
         </ContentWrapper>
       )}
