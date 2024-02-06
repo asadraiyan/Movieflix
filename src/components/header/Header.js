@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./style.scss";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
@@ -70,9 +70,11 @@ export const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo">
-          <img src={logo} alt="" />
-        </div>
+        <Link to={"/"}>
+          <div className="logo">
+            <img src={logo} alt="" />
+          </div>
+        </Link>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies
