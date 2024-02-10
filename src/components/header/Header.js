@@ -5,7 +5,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./style.scss";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
-import logo from "../../assets/movix-logo.svg";
+import logo from "../../assets/movix-logo.png";
 
 export const Header = () => {
   const [show, setShow] = useState("top");
@@ -70,9 +70,10 @@ export const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <Link to={"/"}>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
           <div className="logo">
             <img src={logo} alt="" />
+            <h2>MOVIEFLIX</h2>
           </div>
         </Link>
         <ul className="menuItems">
