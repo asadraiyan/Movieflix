@@ -74,7 +74,7 @@ const Caraousel = ({ data, loading, endpoint, title }) => {
                 >
                   <div className="posterBlock">
                     <Img src={posterUrl} />
-                    <CircleRating rating={item.vote_average.toFixed(1)} />
+                    <CircleRating rating={item.vote_average?.toFixed(1)} />
                     <Genres data={item.genre_ids.slice(0, 2)} />
                   </div>
                   <div className="textBlock">
