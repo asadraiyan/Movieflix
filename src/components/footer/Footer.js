@@ -29,18 +29,38 @@ const Footer = () => {
           pariatur.
         </div>
         <div className="socialIcons">
-          <span className="icon">
+          <a
+            href="https://m.facebook.com/asad.raiyan?mibextid=ZbWKwL"
+            target="_blank"
+            rel="noreferrer"
+            className="icon"
+          >
             <FaFacebookF />
-          </span>
-          <span className="icon">
+          </a>
+          <a
+            href="https://www.instagram.com/asad.raiyan/?igshid=ZDdkNTZiNTM%3D"
+            target="_blank"
+            rel="noreferrer"
+            className="icon"
+          >
             <FaInstagram />
-          </span>
-          <span className="icon">
+          </a>
+          <a
+            href="https://twitter.com/raiyan_asad?t=vzNMJaOErNJDbeT5XjOR4A&s=09"
+            target="_blank"
+            rel="noreferrer"
+            className="icon"
+          >
             <FaTwitter />
-          </span>
-          <span className="icon">
+          </a>
+          <a
+            href="https://www.linkedin.com/in/asad-raiyan-486326188"
+            target="_blank"
+            rel="noreferrer"
+            className="icon"
+          >
             <FaLinkedin />
-          </span>
+          </a>
         </div>
       </ContentWrapper>
     </footer>
