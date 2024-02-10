@@ -7,7 +7,7 @@ import Img from "../../../components/lazyLoadImage/Img";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 
 const HeroBanner = () => {
-  const [background, setBackground] = useState("");
+  // const [background, setBackground] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
@@ -15,12 +15,18 @@ const HeroBanner = () => {
 
   const { data, loading } = useFetch("/movie/upcoming");
 
-  useEffect(() => {
-    const bg =
-      url.backdrop +
-      data?.results[Math.floor(Math.random() * 20)]?.backdrop_path;
-    setBackground(bg);
-  }, [data]);
+  // useEffect(() => {
+  //   const bg =
+  //     url.backdrop +
+  //     data?.results[Math.floor(Math.random() * 20)]?.backdrop_path;
+  //   setBackground(bg);
+  // }, [data]);
+
+  const bg =
+    url.backdrop +
+      data?.results[Math.floor(Math.random() * 20)]?.backdrop_path ||
+    "https://image.tmdb.org/t/p/original/zIYROrkHJPYB3VTiW1L9QVgaQO.jpg";
+  // setBackground(bg);
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
@@ -38,7 +44,7 @@ const HeroBanner = () => {
       <div className="heroBanner">
         {!loading && (
           <div className="backdrop-img">
-            <Img src={background} />
+            <Img src={bg} />
           </div>
         )}
         <div className="opacity-layer"></div>
