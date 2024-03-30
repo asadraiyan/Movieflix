@@ -14,6 +14,7 @@ const HeroBanner = () => {
   const { url } = useSelector((state) => state.home);
 
   const { data, loading } = useFetch("/movie/upcoming");
+  // console.log("data=", data);
 
   // useEffect(() => {
   //   const bg =
@@ -22,10 +23,18 @@ const HeroBanner = () => {
   //   setBackground(bg);
   // }, [data]);
 
-  const bg =
-    url.backdrop +
-      data?.results[Math.floor(Math.random() * 20)]?.backdrop_path ||
-    "https://image.tmdb.org/t/p/original/zIYROrkHJPYB3VTiW1L9QVgaQO.jpg";
+  // console.log("url=", url);
+
+  let bg = "";
+
+  if (data) {
+    bg =
+      url?.backdrop +
+      data?.results[Math?.floor(Math?.random() * 20)]?.backdrop_path;
+  } else {
+    bg = "https://image.tmdb.org/t/p/original/zIYROrkHJPYB3VTiW1L9QVgaQO.jpg";
+  }
+
   // setBackground(bg);
 
   const searchQueryHandler = (event) => {
@@ -33,7 +42,7 @@ const HeroBanner = () => {
       navigate(`/search/${query}`);
     }
   };
-  const searchQueryOnClickHandler = (event) => {
+  const searchQueryOnClickHandler = () => {
     if (query.length > 0) {
       navigate(`/search/${query}`);
     }

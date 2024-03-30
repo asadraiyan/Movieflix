@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchApiData } from "./utils/api";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,11 +10,14 @@ import Details from "./pages/details/Details";
 import SearchResult from "./pages/searchResult/SearchResult";
 import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
+import NetworkError from "./pages/404/NetworkError";
 
 function App() {
   const dispatch = useDispatch();
   const url = useSelector((state) => state.home);
   console.log(url);
+
+  const [isNetworkError, setIsNetworkError] = useState(false);
 
   useEffect(() => {
     fetchApiConfig();
@@ -24,11 +27,15 @@ function App() {
   const fetchApiConfig = () => {
     fetchApiData("/configuration").then((res) => {
       console.log(res);
+      if (res.code === "ERR_NETWORK") {
+        setIsNetworkError(true);
+        return;
+      }
 
       const url = {
-        backdrop: res.images.secure_base_url + "original",
-        poster: res.images.secure_base_url + "original",
-        profile: res.images.secure_base_url + "original",
+        backdrop: res.images?.secure_base_url + "original",
+        poster: res.images?.secure_base_url + "original",
+        profile: res.images?.secure_base_url + "original",
       };
       dispatch(getApiConfiguration(url));
     });
@@ -52,6 +59,17 @@ function App() {
     dispatch(getGenres(allGenres));
   };
 
+  console.log("isNetworkError =", isNetworkError);
+
+  if (isNetworkError) {
+    return (
+      <Router>
+        <Header />
+        <NetworkError />
+        <Footer />
+      </Router>
+    );
+  }
   return (
     <Router>
       <Header />
@@ -61,6 +79,7 @@ function App() {
         <Route path="/search/:query" element={<SearchResult />} />
         <Route path="/explore/:mediaType" element={<Explore />} />
         <Route path="*" element={<PageNotFound />} />
+        {/* <Route path="/networkError" element={<NetworkError />} /> */}
       </Routes>
       <Footer />
     </Router>
